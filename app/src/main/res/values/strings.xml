@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ShpTes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home_fragment">Home fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="profile_fragment">Profile fragment</string>
+    <string name="textNameDrawer">Usuario</string>
+</resources>
