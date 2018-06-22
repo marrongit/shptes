@@ -43,6 +43,31 @@
         android:layout_alignLeft="@id/text_view_pass_login"
         android:layout_alignRight="@id/text_view_pass_login"/>
 
+    <TextView
+        android:id="@+id/ask"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_pass_login"
+        android:layout_marginTop="35dp"
+        android:layout_alignLeft="@id/text_view_email_login"
+        android:layout_alignRight="@id/text_view_email_login"
+        android:text="¿No tienes una cuenta?"
+        android:textStyle="italic|bold"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/text_view_sign_out"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ask"
+        android:layout_alignLeft="@id/text_view_email_login"
+        android:layout_alignRight="@id/text_view_email_login"
+        android:text="Registrate"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"/>
+
     <Button
         android:id="@+id/button_login"
         android:layout_width="match_parent"

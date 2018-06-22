@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     public EditText editTextPass;
     public Button buttonLogin;
     public SharedPreferences sharedPreferences;
+    public TextView text_view_sign_out;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        text_view_sign_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),SignOutActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void bindElements(){
         editTextEmail = findViewById(R.id.edit_text_email_login);
         editTextPass = findViewById(R.id.edit_text_pass_login);
         buttonLogin = findViewById(R.id.button_login);
+        text_view_sign_out = findViewById(R.id.text_view_sign_out);
     }
 
     public void validSesion(String email, String pass){
