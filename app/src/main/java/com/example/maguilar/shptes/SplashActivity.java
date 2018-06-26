@@ -22,8 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         Intent intentLogin = new Intent(this,LoginActivity.class);
         Intent intentMain = new Intent(this,MainActivity.class);
 
-        if(!TextUtils.isEmpty(getSharedPrefsEmail(sharedPreferences)) &&
-                !TextUtils.isEmpty(getSharedPrefsPass(sharedPreferences))){
+        if(!TextUtils.isEmpty(getSharedPrefsEmail(sharedPreferences))){
             startActivity(intentMain);
         } else {
             startActivity(intentLogin);
@@ -36,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         return sharedPreferences.getString("email","");
     }
 
-    public String getSharedPrefsPass(SharedPreferences sharedPreferences){
+    public String getSharedPrefsName(SharedPreferences sharedPreferences){
         return sharedPreferences.getString("pass","");
     }
 }
