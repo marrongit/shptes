@@ -85,22 +85,22 @@ public class LoginActivity extends AppCompatActivity {
                 realmResultsUser = realm.where(Users.class).equalTo("email",email).findFirst();
 
                 if(realmResultsUser.getEmail().isEmpty()){
-                    Toast.makeText(this, "vacio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "El Usuario no esta registrado", Toast.LENGTH_SHORT).show();
                 } else{
-                    Toast.makeText(this, "el usuario es: "+realmResultsUser.getEmail(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this,MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    setSharedPreferences(email,realmResultsUser);
+                    Toast.makeText(this, "Bienvenido "+ realmResultsUser.getName(), Toast.LENGTH_SHORT).show();
                 }
             }
-
-            //Intent intent = new Intent(this,MainActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-           // startActivity(intent);
-            //setSharedPreferences(email,pass);
         }
     }
 
-    public void setSharedPreferences(String email,String pass){
+    public void setSharedPreferences(String email,Users realmResultsUser){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("email",email);
+        editor.putString("name",realmResultsUser.getName());
         editor.apply();
     }
 
