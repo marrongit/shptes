@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
 public class ManActivity extends AppCompatActivity {
 
     TextView expandableListTitle;
@@ -36,12 +40,16 @@ public class ManActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     //Ptos
-    List<Shirts> listPtos;
+    List listptos;
+    List<Shirts> listShirts;
+    List<Polos> listPolos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man);
+        Realm realm = Realm.getDefaultInstance();
+        //insert(realm);
         bindElements();
 
         setSupportActionBar(toolbar);
@@ -49,24 +57,14 @@ public class ManActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Man");
 
-        expandibleData();
+        //listShirts = realm.where(Shirts.class).findAll();
+        //listptos = realm.where(Shirts.class).findAll();
+
+        expandibleData(realm);
         expandibleAdapter = new ExpandibleAdapter(this,listExpandHeader,listDataChild);
         expandableListView.setAdapter(expandibleAdapter);
 
-        listPtos = ptos();
-
-        layoutManager = new GridLayoutManager(this,2);
-        adapter = new RecyclerAdapter(listPtos, R.layout.list_recycler_item, new RecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Shirts ptos, int position) {
-                Toast.makeText(ManActivity.this,
-                        "Click en elemento "+ ptos.getTitle() + " posición " + position,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        recyclerViewClothes.setLayoutManager(layoutManager);
-        recyclerViewClothes.setAdapter(adapter);
+        //Shirts shirt = realm.where(Shirts.class).equalTo("id",1).findFirst();
 
     }
 
@@ -86,7 +84,7 @@ public class ManActivity extends AppCompatActivity {
         }
     }
 
-    public void expandibleData(){
+    public void expandibleData(final Realm realm){
         listExpandHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
@@ -94,7 +92,7 @@ public class ManActivity extends AppCompatActivity {
 
         List<String> clothes = new ArrayList<String>();
         clothes.add("Camisas");
-        clothes.add("Blusas");
+        clothes.add("Polos");
         clothes.add("Jeans");
 
         listDataChild.put(listExpandHeader.get(0),clothes);
@@ -111,9 +109,46 @@ public class ManActivity extends AppCompatActivity {
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(getApplicationContext(),
-                        listExpandHeader.get(groupPosition) + " : " + listDataChild.get(listExpandHeader.get(groupPosition)).get(childPosition),Toast.LENGTH_SHORT).show();
-                return false;
+                String subcategoria = listDataChild.get(listExpandHeader.get(groupPosition)).get(childPosition);
+                if(subcategoria.equals("Camisas")){
+                    listShirts = realm.where(Shirts.class).findAll();
+                    adapter = new RecyclerAdapter(listShirts, R.layout.list_recycler_item, new RecyclerAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Shirts ptos, int position) {
+                            Toast.makeText(ManActivity.this,
+                                    "Click en elemento "+ ptos.getTitle() + " posición " + position,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    layoutManager = new GridLayoutManager(getApplicationContext(),2);
+                    int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
+                    parent.setItemChecked(index, true);
+                    recyclerViewClothes.setLayoutManager(layoutManager);
+                    recyclerViewClothes.setAdapter(adapter);
+
+                    expandableListView.collapseGroup(groupPosition);
+                } else if(subcategoria.equals("Polos")){
+                    listPolos = realm.where(Polos.class).findAll();
+                    adapter = new RecyclerAdapterPolos(listPolos, R.layout.list_recycler_item, new RecyclerAdapterPolos.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Polos ptos, int position) {
+                            Toast.makeText(ManActivity.this,
+                                    "Click en elemento "+ ptos.getTitle() + " posición " + position,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    layoutManager = new GridLayoutManager(getApplicationContext(),2);
+
+                    recyclerViewClothes.setLayoutManager(layoutManager);
+                    recyclerViewClothes.setAdapter(adapter);
+                    expandableListView.collapseGroup(groupPosition);
+                } else {
+                     Toast.makeText(getApplicationContext(),
+                           listExpandHeader.get(groupPosition) +
+                                   " : " + listDataChild.get(listExpandHeader.get(groupPosition)).get(childPosition),
+                             Toast.LENGTH_SHORT).show();
+                }
+                return true;
             }
         });
 
@@ -134,10 +169,17 @@ public class ManActivity extends AppCompatActivity {
         recyclerViewClothes = findViewById(R.id.recyclerView);
     }
 
-    public List<Shirts> ptos(){
-        return new ArrayList<Shirts>(){{
-            add(new Shirts("M","M","Azul",R.drawable.camisa_azul,"Camisa Blas","Tela"));
-            add(new Shirts("G","M","Rosa",R.drawable.camisa_rosa,"Camisa Shown","Lino"));
+    /*public List<Polos> ptos(){
+        return new ArrayList<Polos>(){{
+            add(new Polos("M","M","Gris",R.drawable.polo_hombre,"Polo Ralph","Tela",2));
+            //add(new Shirts("G","M","Rosa",R.drawable.camisa_rosa,"Camisa Shown","Lino",1));
         }};
     }
+
+    private void insert(Realm realm){
+        realm.beginTransaction();
+        listPolos = ptos();
+        realm.copyToRealm(listPolos);
+        realm.commitTransaction();
+    }*/
 }

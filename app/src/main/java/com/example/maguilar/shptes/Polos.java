@@ -8,7 +8,7 @@ import io.realm.annotations.Required;
  * Created by maguilar on 10/07/2018.
  */
 
-public class Shirts extends RealmObject{
+public class Polos extends RealmObject{
 
     //properties
     @PrimaryKey
@@ -19,9 +19,9 @@ public class Shirts extends RealmObject{
     private int subCategoria;
 
 
-    public Shirts(){}
+    public Polos(){}
 
-    public Shirts(String size, String genero, String colores, int image,String title,String desc,int subCategoria){
+    public Polos(String size, String genero, String colores, int image,String title,String desc,int subCategoria){
         this.id = MyApplication.ShirtId.incrementAndGet();
         this.size = size;
         this.genero = genero;

@@ -15,6 +15,8 @@ import io.realm.RealmResults;
 
 public class MyApplication extends Application{
     public static AtomicInteger UserId = new AtomicInteger();
+    public static AtomicInteger ShirtId = new AtomicInteger();
+    public static AtomicInteger PoloId = new AtomicInteger();
 
     @Override
     public void onCreate() {
@@ -23,6 +25,8 @@ public class MyApplication extends Application{
         setUpConfiguration();
         Realm realm = Realm.getDefaultInstance();
         UserId = getIdByTable(realm,Users.class);
+        ShirtId = getIdByTable(realm,Shirts.class);
+        PoloId = getIdByTable(realm,Polos.class);
         realm.close();
     }
 
