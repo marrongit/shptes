@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,22 +16,35 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textViewNameND;
+    TextView expandableListTitle;
+    ImageButton imageButtonMen;
 
     public SharedPreferences sharedPreferences;
     public DrawerLayout drawerLayout;
     NavigationView navigationView;
     public Toolbar toolbar;
 
+    Bundle bundle = new Bundle();
+
+    String Cat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
 
         bindElements();
         sharedPreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE);
@@ -45,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No hay valor", Toast.LENGTH_SHORT).show();
         } else {
             textViewNameND.setText(name);
+        }
+
+        if(intent.hasExtra("Cat")){
+             Cat = intent.getStringExtra("Cat");
+            if(Cat.equals("1")){
+                Fragment newFragment = new HomeFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameContentDrawer,newFragment).commit();
+            }
         }
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -124,5 +146,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
         textViewNameND = findViewById(R.id.textViewNameND);
+        imageButtonMen = findViewById(R.id.imageButtonMan);
     }
+
 }

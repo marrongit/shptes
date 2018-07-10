@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_margin="16dp"
+        android:id="@+id/cardViewMan">
+
+        <ImageView
+            android:id="@+id/imageViewMan"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/bg" />
+
+        <TextView
+            android:id="@+id/textViewTitleMan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:text="Ropa"
+            android:textSize="20dp"
+            android:textStyle="italic|bold"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/textViewDescMan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="30dp"
+            android:text="Descripcion"
+            android:textSize="15dp"
+            android:textStyle="italic|bold"
+            android:paddingBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/textViewSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:text="Talla"
+            android:textSize="15dp"
+            android:textStyle="italic|bold"
+            android:paddingBottom="10dp"/>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
