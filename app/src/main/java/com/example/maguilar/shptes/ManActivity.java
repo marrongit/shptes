@@ -25,6 +25,7 @@ import io.realm.RealmObject;
 public class ManActivity extends AppCompatActivity {
 
     TextView expandableListTitle;
+    TextView textViewTitleCat;
 
     Toolbar toolbar;
 
@@ -64,7 +65,7 @@ public class ManActivity extends AppCompatActivity {
         expandibleAdapter = new ExpandibleAdapter(this,listExpandHeader,listDataChild);
         expandableListView.setAdapter(expandibleAdapter);
 
-        //Shirts shirt = realm.where(Shirts.class).equalTo("id",1).findFirst();
+        getIntents(realm);
 
     }
 
@@ -93,7 +94,7 @@ public class ManActivity extends AppCompatActivity {
         List<String> clothes = new ArrayList<String>();
         clothes.add("Camisas");
         clothes.add("Polos");
-        clothes.add("Jeans");
+        //clothes.add("Jeans");
 
         listDataChild.put(listExpandHeader.get(0),clothes);
 
@@ -114,19 +115,26 @@ public class ManActivity extends AppCompatActivity {
                     listShirts = realm.where(Shirts.class).findAll();
                     adapter = new RecyclerAdapter(listShirts, R.layout.list_recycler_item, new RecyclerAdapter.OnItemClickListener() {
                         @Override
-                        public void onItemClick(Shirts ptos, int position) {
-                            Toast.makeText(ManActivity.this,
+                        public void onItemClick(Shirts shirts, int position) {
+                            /*Toast.makeText(ManActivity.this,
                                     "Click en elemento "+ ptos.getTitle() + " posición " + position,
-                                    Toast.LENGTH_SHORT).show();
+                                    Toast.LENGTH_SHORT).show();*/
+                            //Realm realm = Realm.getDefaultInstance();
+                            //Shirts shirts = realm.where(Shirts.class).equalTo("id",pto).findFirst();
+                            Intent intent = new Intent(getApplicationContext(),ItemViewActivity.class);
+                           // Bundle extras = new Bundle();
+                            intent.putExtra("id",shirts.getId());
+                            intent.putExtra("subcat",shirts.getSubCategoria());
+                            intent.putExtra("activity","man");
+                            //intent.putExtras(extras);
+                            startActivity(intent);
                         }
                     });
                     layoutManager = new GridLayoutManager(getApplicationContext(),2);
-                    int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
-                    parent.setItemChecked(index, true);
                     recyclerViewClothes.setLayoutManager(layoutManager);
                     recyclerViewClothes.setAdapter(adapter);
-
                     expandableListView.collapseGroup(groupPosition);
+                    textViewTitleCat.setText("Camisas");
                 } else if(subcategoria.equals("Polos")){
                     listPolos = realm.where(Polos.class).findAll();
                     adapter = new RecyclerAdapterPolos(listPolos, R.layout.list_recycler_item, new RecyclerAdapterPolos.OnItemClickListener() {
@@ -138,10 +146,10 @@ public class ManActivity extends AppCompatActivity {
                         }
                     });
                     layoutManager = new GridLayoutManager(getApplicationContext(),2);
-
                     recyclerViewClothes.setLayoutManager(layoutManager);
                     recyclerViewClothes.setAdapter(adapter);
                     expandableListView.collapseGroup(groupPosition);
+                    textViewTitleCat.setText("Polos");
                 } else {
                      Toast.makeText(getApplicationContext(),
                            listExpandHeader.get(groupPosition) +
@@ -167,6 +175,35 @@ public class ManActivity extends AppCompatActivity {
         expandableListTitle = findViewById(R.id.listTitle);
         expandableListView = findViewById(R.id.expandedList);
         recyclerViewClothes = findViewById(R.id.recyclerView);
+        textViewTitleCat = findViewById(R.id.textViewTitleCat);
+    }
+
+    public void getIntents(Realm realm){
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("subcat")){
+            listShirts = realm.where(Shirts.class).findAll();
+            adapter = new RecyclerAdapter(listShirts, R.layout.list_recycler_item, new RecyclerAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Shirts shirts, int position) {
+                            /*Toast.makeText(ManActivity.this,
+                                    "Click en elemento "+ ptos.getTitle() + " posición " + position,
+                                    Toast.LENGTH_SHORT).show();*/
+                    //Realm realm = Realm.getDefaultInstance();
+                    //Shirts shirts = realm.where(Shirts.class).equalTo("id",pto).findFirst();
+                    Intent intent = new Intent(getApplicationContext(),ItemViewActivity.class);
+                    // Bundle extras = new Bundle();
+                    intent.putExtra("id",shirts.getId());
+                    intent.putExtra("subcat",shirts.getSubCategoria());
+                    //intent.putExtras(extras);
+                    startActivity(intent);
+                }
+            });
+            layoutManager = new GridLayoutManager(getApplicationContext(),2);
+            recyclerViewClothes.setLayoutManager(layoutManager);
+            recyclerViewClothes.setAdapter(adapter);
+            textViewTitleCat.setText("Camisas");
+        }
     }
 
     /*public List<Polos> ptos(){

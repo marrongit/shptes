@@ -23,10 +23,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorAccent"
+            app:titleTextColor="@android:color/white"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
         <FrameLayout
@@ -46,13 +47,22 @@
           app:menu="@menu/nav_options_drawer"
           >
 
+          <ImageView
+              android:id="@+id/imageProfileDrawer"
+              android:layout_width="80dp"
+              android:layout_height="80dp"
+              android:src="@drawable/ic_profile"
+              android:layout_marginTop="50dp"
+              android:background="#fff"
+              android:layout_gravity="center_horizontal"/>
+
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textColor="#FFF"
               android:textSize="20dp"
               android:textStyle="bold"
-              android:layout_marginTop="80dp"
+              android:layout_marginTop="170dp"
               android:layout_marginLeft="10dp"
               android:id="@+id/textViewNameND"
               android:text="@string/textNameDrawer"

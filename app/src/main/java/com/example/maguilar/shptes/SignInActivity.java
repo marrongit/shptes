@@ -86,7 +86,7 @@ public class SignInActivity extends AppCompatActivity {
         saveSharedPreferences(name,email);
 
         realm.beginTransaction();
-        Users user = new Users(name,ap_pat,ap_mat,email,pass);
+        Users user = new Users(name,ap_pat,ap_mat,email,pass,0);
         realm.copyToRealm(user);
         realm.commitTransaction();
     }

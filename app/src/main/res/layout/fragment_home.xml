@@ -10,14 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"/>
+
+        <LinearLayout
+            android:id="@+id/SliderDots"
+            android:layout_below="@+id/viewPager"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"/>
+
         <ImageView
-            android:id="@+id/imageHome"
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/bg" />
+            android:layout_alignBottom="@+id/SliderDots"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/textViewCategory"
@@ -25,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/imageHome"
+            android:layout_below="@+id/SliderDots"
             android:background="#ddd"
             android:padding="10dp"
             android:text="Categorias"
@@ -33,32 +47,41 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageButtonMan"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@mipmap/ic_men_foreground"
+            app:civ_border_width="4dp"
+            app:civ_circle_background_color="#d3d3d3"
+            android:layout_margin="10dp"
             android:layout_below="@+id/textViewCategory"
-            android:foreground="@mipmap/ic_men_foreground" />
+            app:civ_border_color="#d3d3d3"/>
 
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageButtonWoman"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@mipmap/ic_woman_foreground"
+            app:civ_border_width="4dp"
+            app:civ_circle_background_color="#d3d3d3"
+            android:layout_margin="10dp"
             android:layout_below="@+id/textViewCategory"
             android:layout_centerHorizontal="true"
-            android:foreground="@mipmap/ic_woman_foreground" />
+            app:civ_border_color="#d3d3d3"/>
 
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageButtonChild"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@mipmap/ic_child_foreground"
+            app:civ_border_width="4dp"
+            app:civ_circle_background_color="#d3d3d3"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/textViewCategory"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/imageButtonMan"
-            android:layout_below="@id/textViewCategory"
-            android:foreground="@mipmap/ic_child_foreground" />
+            app:civ_border_color="#d3d3d3"/>
 
     </RelativeLayout>
 

@@ -22,15 +22,17 @@ public class Users extends RealmObject {
     private String email;
     @Required
     private String pass;
+    private int image;
 
     public Users(){}
-    public Users(String name,String f_last_name,String s_last_name,String email,String pass){
+    public Users(String name,String f_last_name,String s_last_name,String email,String pass,int image){
         this.id = MyApplication.UserId.incrementAndGet();
         this.name = name;
         this.f_last_name = f_last_name;
         this.s_last_name = s_last_name;
         this.email = email;
         this.pass = pass;
+        this.image = image;
     }
 
     public String getName() {
@@ -71,5 +73,13 @@ public class Users extends RealmObject {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }

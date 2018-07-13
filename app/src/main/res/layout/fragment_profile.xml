@@ -2,14 +2,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/profile_fragment"
     tools:context="com.example.maguilar.shptes.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/profile_fragment"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/relativeProfile"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/toolbar"
+            android:background="#778899"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_profile"
+            app:civ_border_width="4dp"
+            app:civ_circle_background_color="#fff"
+            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="130dp"
+            app:civ_border_color="#d3d3d3"/>
+
+        <TextView
+            android:id="@+id/textViewNameProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:layout_below="@id/relativeProfile"
+            android:layout_marginTop="40dp"
+            android:textStyle="italic|bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/textViewNameProfile1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_below="@id/textViewNameProfile"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/textViewEmailProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:layout_below="@id/textViewNameProfile1"
+            android:layout_marginTop="20dp"
+            android:textStyle="italic|bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/textViewEmailProfile1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:layout_below="@id/textViewEmailProfile"
+            android:layout_marginLeft="10dp"
+            />
+
+
+
+    </RelativeLayout>
 
 </FrameLayout>

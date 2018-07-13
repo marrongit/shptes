@@ -22,7 +22,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".ManActivity"></activity>
+        <activity android:name=".ManActivity" />
+        <activity android:name=".ItemViewActivity" />
+        <activity android:name=".ShopCarActivity"></activity>
     </application>
 
 </manifest>

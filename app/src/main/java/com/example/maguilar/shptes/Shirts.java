@@ -87,4 +87,8 @@ public class Shirts extends RealmObject{
     public void setSubCategoria(int subCategoria) {
         this.subCategoria = subCategoria;
     }
+
+    public int getId() {
+        return id;
+    }
 }
