@@ -1,4 +1,6 @@
-package com.example.maguilar.shptes;
+package com.example.maguilar.shptes.Models;
+
+import com.example.maguilar.shptes.MyApplication;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

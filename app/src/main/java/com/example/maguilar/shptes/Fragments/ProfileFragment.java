@@ -1,4 +1,4 @@
-package com.example.maguilar.shptes;
+package com.example.maguilar.shptes.Fragments;
 
 
 import android.content.Context;
@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import java.util.List;
+import com.example.maguilar.shptes.R;
+import com.example.maguilar.shptes.Models.Users;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 
 /**

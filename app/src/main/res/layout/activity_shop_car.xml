@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.maguilar.shptes.ShopCarActivity">
+    tools:context="com.example.maguilar.shptes.Activities.ShopCarActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

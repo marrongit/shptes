@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff"
-        tools:context="com.example.maguilar.shptes.ItemViewActivity">
+        tools:context="com.example.maguilar.shptes.Activities.ItemViewActivity">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

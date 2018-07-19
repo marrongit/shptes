@@ -1,29 +1,24 @@
-package com.example.maguilar.shptes;
+package com.example.maguilar.shptes.Fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
-import java.util.List;
+import com.example.maguilar.shptes.Activities.ManActivity;
+import com.example.maguilar.shptes.R;
+import com.example.maguilar.shptes.ViewPagerHome;
+
 import java.util.Timer;
 import java.util.TimerTask;
 

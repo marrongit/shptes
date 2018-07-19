@@ -1,4 +1,4 @@
-package com.example.maguilar.shptes;
+package com.example.maguilar.shptes.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.maguilar.shptes.R;
+import com.example.maguilar.shptes.Models.Shirts;
+import com.example.maguilar.shptes.Models.ShopCar;
 
 import java.util.List;
 

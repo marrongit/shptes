@@ -9,6 +9,9 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Build;
 
+import com.example.maguilar.shptes.Activities.MainActivity;
+import com.example.maguilar.shptes.Activities.ShopCarActivity;
+
 /**
  * Created by maguilar on 16/07/2018.
  */

@@ -2,6 +2,10 @@ package com.example.maguilar.shptes;
 
 import android.app.Application;
 
+import com.example.maguilar.shptes.Models.Polos;
+import com.example.maguilar.shptes.Models.Shirts;
+import com.example.maguilar.shptes.Models.Users;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.realm.Realm;
