@@ -82,4 +82,8 @@ public class Users extends RealmObject {
     public void setImage(int image) {
         this.image = image;
     }
+
+    public int getId() {
+        return id;
+    }
 }

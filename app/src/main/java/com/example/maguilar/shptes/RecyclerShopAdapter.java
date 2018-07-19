@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.realm.Realm;
+
 /**
  * Created by maguilar on 13/07/2018.
  */
@@ -17,10 +19,13 @@ import java.util.List;
 public class RecyclerShopAdapter extends RecyclerView.Adapter<RecyclerShopAdapter.ViewHolder> {
 
     private int layout;
-    private List<Shirts> list;
+    private List<ShopCar> list;
     private onItemClickListener listener;
+    private Shirts shirts;
+    Realm realm = Realm.getDefaultInstance();
 
-    public RecyclerShopAdapter(int layout,List<Shirts> list, onItemClickListener listener){
+    public RecyclerShopAdapter(int layout,List<ShopCar> list,
+                               onItemClickListener listener){
         this.layout = layout;
         this.list = list;
         this.listener = listener;
@@ -36,7 +41,7 @@ public class RecyclerShopAdapter extends RecyclerView.Adapter<RecyclerShopAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(list.get(position),listener);
+        holder.bind(list.get(position),listener, realm, shirts);
     }
 
     @Override
@@ -58,16 +63,20 @@ public class RecyclerShopAdapter extends RecyclerView.Adapter<RecyclerShopAdapte
             textViewSize = itemView.findViewById(R.id.textViewSizeCar);
         }
 
-        private void bind(final Shirts shirts, final onItemClickListener listener){
-            imageView.setImageResource(shirts.getImage());
-            textViewTitle.setText(shirts.getTitle());
-            textViewDesc.setText(shirts.getDesc());
-            textViewSize.setText(shirts.getSize());
+        private void bind(final ShopCar shopCar, final onItemClickListener listener, Realm realm, Shirts shirts){
+            if(shopCar.getId_subcat() == 1){
+                shirts = realm.where(Shirts.class).equalTo("id",shopCar.getId_pto()).findFirst();
+                imageView.setImageResource(shirts.getImage());
+                textViewTitle.setText(shirts.getTitle());
+                textViewDesc.setText(shirts.getDesc());
+                textViewSize.setText(shirts.getSize());
+            }
 
+            final Shirts finalShirts = shirts;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(shirts,getAdapterPosition());
+                    listener.onItemClick(finalShirts,getAdapterPosition());
                 }
             });
         }

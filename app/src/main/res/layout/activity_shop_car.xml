@@ -17,6 +17,14 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_notify"
+        android:background="@color/colorAccent"
+        android:text="Notify"
+        android:textColor="#fff"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

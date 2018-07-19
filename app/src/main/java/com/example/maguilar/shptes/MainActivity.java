@@ -1,5 +1,8 @@
 package com.example.maguilar.shptes;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -192,5 +195,30 @@ public class MainActivity extends AppCompatActivity {
         textViewNameND = findViewById(R.id.textViewNameND);
         imageButtonMen = findViewById(R.id.imageButtonMan);
         imageViewProfile = findViewById(R.id.imageProfileDrawer);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setCount(this, "1",menu);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void setCount(Context context, String count, Menu menu) {
+        MenuItem menuItem = menu.findItem(R.id.shopCar);
+        BitmapDrawable icon = (BitmapDrawable) menuItem.getIcon();
+        LayerDrawable iconLayer = new LayerDrawable(new Drawable [] { icon });
+        CountDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = iconLayer.findDrawableByLayerId(R.id.ic_group_count);
+        if (reuse != null && reuse instanceof CountDrawable) {
+            badge = (CountDrawable) reuse;
+        } else {
+            badge = new CountDrawable(context);
+        }
+
+        badge.setCount(count);
+        iconLayer.mutate();
+        iconLayer.setDrawableByLayerId(R.id.ic_group_count, badge);
     }
 }

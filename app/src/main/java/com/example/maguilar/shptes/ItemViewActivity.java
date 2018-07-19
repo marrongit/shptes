@@ -1,12 +1,21 @@
 package com.example.maguilar.shptes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -20,19 +29,23 @@ public class ItemViewActivity extends AppCompatActivity {
     TextView textViewTitle;
     TextView textViewDesc;
     TextView textViewPrice;
+    ImageView imageViewShopCar;
     Toolbar toolbar;
     Intent intent;
+    Realm realm = Realm.getDefaultInstance();
+    MenuItem menuItem;
 
     //List<Shirts> list;
 
     // variables
-    int subcat;
+    int subcat,id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_view);
         bindElements();
+        final SharedPreferences sharedPreferences = getSharedPreferences("preferences",Context.MODE_PRIVATE);
 
         intent = getIntent();
 
@@ -42,19 +55,35 @@ public class ItemViewActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Producto");
 
         if(intent.hasExtra("id")){
-            int id = intent.getIntExtra("id",0);
+            id = intent.getIntExtra("id",0);
             subcat = intent.getIntExtra("subcat",0);
-            Realm realm = Realm.getDefaultInstance();
+            //final Realm realm = Realm.getDefaultInstance();
 
            switch (subcat){
                case 1:
-                   Shirts shirts = realm.where(Shirts.class).equalTo("subCategoria",subcat).findFirst();
+                   final Shirts shirts = realm.where(Shirts.class).equalTo("subCategoria",subcat).findFirst();
                    textViewTitle.setText("id "+id+" "+"subcategoria "+subcat);
                    textViewDesc.setText(shirts.getDesc());
                    imageViewPto.setImageResource(shirts.getImage());
                    break;
            }
         }
+
+        imageViewShopCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                realm.beginTransaction();
+                String email = sharedPreferences.getString("email","");
+                Users users = realm.where(Users.class).equalTo("email",email).findFirst();
+                ShopCar shopCar = new ShopCar(users.getId(),id,1,subcat);
+                realm.copyToRealm(shopCar);
+                RealmResults<ShopCar> countShopCar = realm.where(ShopCar.class).findAll();
+                int count = countShopCar.size();
+                Toast.makeText(ItemViewActivity.this,
+                        "Se han guardado "+count+" en tu carrito", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
 
     }
 
@@ -64,6 +93,7 @@ public class ItemViewActivity extends AppCompatActivity {
         textViewTitle = findViewById(R.id.textViewTitleItem);
         textViewDesc = findViewById(R.id.textViewDescItem);
         textViewPrice = findViewById(R.id.textViewPriceItem);
+        imageViewShopCar = findViewById(R.id.button_shop_item);
     }
 
     @Override
