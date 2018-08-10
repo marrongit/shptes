@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.maguilar.shptes.Models.Polos;
 import com.example.maguilar.shptes.R;
 import com.example.maguilar.shptes.Models.Shirts;
 
@@ -18,12 +19,12 @@ import java.util.List;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    private List<Shirts> ptos;
+    private List<Shirts> shirts;
     private int layout;
     private OnItemClickListener onItemClickListener;
 
-    public RecyclerAdapter(List<Shirts> ptos,int layout,OnItemClickListener onItemClickListener){
-        this.ptos = ptos;
+    public RecyclerAdapter(List<Shirts> shirts,int layout,OnItemClickListener onItemClickListener){
+        this.shirts = shirts;
         this.layout = layout;
         this.onItemClickListener = onItemClickListener;
     }
@@ -37,12 +38,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
-        holder.bind(ptos.get(position), onItemClickListener);
+        holder.bind(shirts.get(position), onItemClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return ptos.size();
+        return shirts.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -62,16 +63,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             textViewSize = itemView.findViewById(R.id.textViewSize);
         }
 
-        private void bind(final Shirts ptos, final OnItemClickListener listener){
-            imageView.setImageResource(ptos.getImage());
-            textViewTitle.setText(ptos.getTitle());
-            textViewDesc.setText(ptos.getDesc());
-            textViewSize.setText("Talla: "+ptos.getSize());
+        private void bind(final Shirts shirts, final OnItemClickListener listener){
+            imageView.setImageResource(shirts.getImage());
+            textViewTitle.setText(shirts.getTitle());
+            textViewDesc.setText(shirts.getDesc());
+            textViewSize.setText("Talla: "+shirts.getSize());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(ptos, getAdapterPosition());
+                    listener.onItemClick(shirts, getAdapterPosition());
                 }
             });
         }
